@@ -1,5 +1,14 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Appearance, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { Colors } from "@/constants/Colors";
+
+const colorScheme = Appearance.getColorScheme();
+const theme = colorScheme === "dark" ? Colors.dark : Colors.light;
+
+interface Theme {
+	background: string;
+	text: string;
+}
 
 interface Props {
 	wrongGuesses: Number;
@@ -27,65 +36,68 @@ const HangManDraw: React.FC<Props> = ({ wrongGuesses }) => {
 };
 
 export default HangManDraw;
+const styles = createStyles(theme)
 
-const styles = StyleSheet.create({
-	container: {
-		marginTop: 20,
-		alignItems: "center",
-	},
-	body: {
-		height: 40,
-		width: 2,
-		backgroundColor: "white",
-		marginLeft: 60,
-	},
-	hanger: {
-		height: 150,
-		width: 100,
-		borderLeftWidth: 2,
-		borderLeftColor: "white",
-		borderTopWidth: 2,
-		borderTopColor: "white",
-	},
-	head: {
-		width: 40,
-		height: 40,
-		borderWidth: 2,
-		borderColor: "white",
-		borderRadius: 50,
-		marginLeft: 40,
-	},
-	leftArm: {
-		height: 30,
-		width: 2,
-		backgroundColor: "white",
-		transform: [{ rotate: "45deg" }],
-		marginLeft: 50,
-		marginTop: -55,
-	},
-	leftLeg: {
-		height: 30,
-		width: 2,
-		backgroundColor: "white",
-		transform: [{ rotate: "45deg" }],
-		marginLeft: 50,
-		marginTop: -10,
-	},
-	rightArm: {
-		height: 30,
-		width: 2,
-		backgroundColor: "white",
-		transform: [{ rotate: "-45deg" }],
-		marginLeft: 70,
-		marginTop: -30,
-	},
-	rightLeg: {
-		height: 30,
-		width: 2,
-		backgroundColor: "white",
-		position: "absolute",
-		transform: [{ rotate: "-45deg" }],
-		marginLeft: 70,
-		marginTop: 70,
-	},
-});
+function createStyles(theme: Theme) {
+	return StyleSheet.create({
+		container: {
+			marginTop: 20,
+			alignItems: "center",
+		},
+		body: {
+			height: 40,
+			width: 2,
+			backgroundColor: theme.text,
+			marginLeft: 60,
+		},
+		hanger: {
+			height: 150,
+			width: 100,
+			borderLeftWidth: 2,
+			borderLeftColor: theme.text,
+			borderTopWidth: 2,		
+			borderTopColor: theme.text,
+		},
+		head: {
+			width: 40,
+			height: 40,
+			borderWidth: 2,
+			borderColor: theme.text,
+			borderRadius: 50,
+			marginLeft: 40,
+		},
+		leftArm: {
+			height: 30,
+			width: 2,
+			backgroundColor: theme.text,
+			transform: [{ rotate: "45deg" }],
+			marginLeft: 50,
+			marginTop: -55,
+		},
+		leftLeg: {
+			height: 30,
+			width: 2,
+			backgroundColor: theme.text,
+			transform: [{ rotate: "45deg" }],
+			marginLeft: 50,
+			marginTop: -10,
+		},
+		rightArm: {
+			height: 30,
+			width: 2,
+			backgroundColor: theme.text,
+			transform: [{ rotate: "-45deg" }],
+			marginLeft: 70,
+			marginTop: -30,
+		},
+		rightLeg: {
+			height: 30,
+			width: 2,
+			backgroundColor: theme.text,
+			position: "absolute",
+			transform: [{ rotate: "-45deg" }],
+			marginLeft: 70,
+			marginTop: 70,
+		},
+	});
+}
